@@ -1,5 +1,5 @@
-// Función para cifrar el mensaje con AES
-  document.getElementById("cifrarBtn").addEventListener("click", function () {
+ // Función para cifrar el mensaje con AES
+ document.getElementById("cifrarBtn").addEventListener("click", function () {
     var claveCifrado = document.getElementById("claveCifrado").value;
     var mensajeOriginal = document.getElementById("mensajeOriginal").value;
 
@@ -15,5 +15,11 @@
     var bytesDecifrados = CryptoJS.AES.decrypt(textoCifrado, claveDescifrado);
     var textoDescifrado = bytesDecifrados.toString(CryptoJS.enc.Utf8);
 
-    document.getElementById("textoDescifrado").innerText = textoDescifrado;
+    if (textoDescifrado) {
+      document.getElementById("textoDescifrado").innerText = textoDescifrado;
+      document.getElementById("claveIncorrecta").innerText = ""; 
+    } else {
+        document.getElementById("textoDescifrado").innerText = "";
+      document.getElementById("claveIncorrecta").innerText = "Clave incorrecta";
+    }
   });

@@ -9,40 +9,41 @@
 </head>
 <body>
 
-    <div class="container mt-5">
-        <h1>Cifrado con AES</h1>
-        <form id="cifradoForm">
-          <div class="form-group">
-            <label for="claveCifrado">Clave de Cifrado</label>
-            <input type="text" class="form-control" id="claveCifrado" placeholder="Introduce la clave de cifrado">
-          </div>
-          <div class="form-group">
-            <label for="mensajeOriginal">Mensaje Original</label>
-            <textarea class="form-control" id="mensajeOriginal" rows="3" placeholder="Introduce el mensaje original"></textarea>
-          </div>
-          <button type="button" class="btn btn-primary" id="cifrarBtn">Cifrar con AES</button>
-        </form>
-      
-        <div class="mt-3">
-          <h3>Texto Cifrado</h3>
-          <p id="textoCifrado"></p>
-        </div>
-      
-        <h1>Descifrado con AES</h1>
-        <form id="descifradoForm">
-          <div class="form-group">
-            <label for="claveDescifrado">Clave de Descifrado</label>
-            <input type="text" class="form-control" id="claveDescifrado" placeholder="Introduce la clave de descifrado">
-          </div>
-          <button type="button" class="btn btn-primary" id="descifrarBtn">Descifrar con AES</button>
-        </form>
-      
-        <div class="mt-3">
-          <h3>Texto Descifrado</h3>
-          <p id="textoDescifrado"></p>
-        </div>
+    
+<div class="container mt-5">
+    <h1>Cifrado con AES</h1>
+    <form id="cifradoForm">
+      <div class="form-group">
+        <label for="claveCifrado">Clave de Cifrado</label>
+        <input type="text" class="form-control" id="claveCifrado" placeholder="Introduce la clave de cifrado">
       </div>
-
+      <div class="form-group">
+        <label for="mensajeOriginal">Mensaje Original</label>
+        <textarea class="form-control" id="mensajeOriginal" rows="3" placeholder="Introduce el mensaje original"></textarea>
+      </div>
+      <button type="button" class="btn btn-primary" id="cifrarBtn">Cifrar con AES</button>
+    </form>
+  
+    <div class="mt-3">
+      <h3>Texto Cifrado</h3>
+      <p id="textoCifrado"></p>
+    </div>
+  
+    <h1>Descifrado con AES</h1>
+    <form id="descifradoForm">
+      <div class="form-group">
+        <label for="claveDescifrado">Clave de Descifrado</label>
+        <input type="text" class="form-control" id="claveDescifrado" placeholder="Introduce la clave de descifrado">
+      </div>
+      <button type="button" class="btn btn-primary" id="descifrarBtn">Descifrar con AES</button>
+    </form>
+  
+    <div class="mt-3">
+      <h3>Texto Descifrado</h3>
+      <p id="textoDescifrado"></p>
+      <p id="claveIncorrecta" class="text-danger"></p> <!-- Mensaje de clave incorrecta -->
+    </div>
+  </div>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
