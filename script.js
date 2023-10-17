@@ -38,51 +38,37 @@
 }
 
 // Función para cifrar con RSA
-function cifrarRSA() {
-    const clavePublica = parseInt(document.getElementById("clavePublica").value);
-    const n = parseInt(document.getElementById("n").value);
-    const mensajeOriginal = document.getElementById("mensajeOriginal").value;
 
-    // Verificar que los campos no estén vacíos
-    if (isNaN(clavePublica) || isNaN(n) || mensajeOriginal === "") {
-        alert("Por favor, complete todos los campos.");
-        return;
-    }
-
-    // Verificar que la clave pública y n sean coprimos
-    if (gcd(clavePublica, n) !== 1) {
-        alert("La clave pública y n deben ser coprimos.");
-        return;
-    }
-
-    // Realizar el cifrado RSA
-    const mensajeCifrado = Math.pow(mensajeOriginal, clavePublica) % n;
-
-    document.getElementById("textoCifrado").textContent  = mensajeCifrado;
-}
+let arrayCharCifrado;
+let arrayCharDescifrado;
 
 
-// Función para calcular el máximo común divisor (GCD)
+// Función para encontrar el máximo común divisor
 function gcd(a, b) {
     let t;
-    while (1) {
+    while (b !== 0) {
         t = a % b;
-        if (t == 0) return b;
         a = b;
         b = t;
     }
+    return a;
 }
 
-// Función para calcular el valor de d (inverso modular)
-function calcularD(e, phi) {
+function calcularD(e, phi, maxIteraciones = 1000) {
     let d = 1;
-    while (true) {
+    let iteraciones = 0;
+    
+    while (iteraciones < maxIteraciones) {
         d++;
-        if ((d * e) % phi === 1) {
+        if ((d * e) % phi === 1 && gcd(e, phi) === 1) {
             return d;
         }
+        iteraciones++;
     }
+    
+    throw new Error("No se encontró un valor válido de 'd' después de " + maxIteraciones + " iteraciones.");
 }
+
 
 // Evento de cálculo al hacer clic en el botón "Calcular"
 document.getElementById("calcularNyPhi").addEventListener("click", function() {
@@ -126,16 +112,19 @@ document.getElementById("calcularD").addEventListener("click", function() {
         return;
     }
 
-    const mensajeCifrado = mensajeOriginal.split('').map(char => char.charCodeAt(0));
-    const mensajeCifradoCifrado = mensajeCifrado.map(charCode => (Math.pow(charCode, e) % n));
+    const mensajeToChar= mensajeOriginal.split('').map(char => char.charCodeAt(0));
+    console.log(mensajeToChar)
+    const mensajeArrayCharCifrado = mensajeToChar.map(charCode => (Math.pow(charCode, e) % n));
+    arrayCharCifrado = mensajeArrayCharCifrado
+   
     
-    document.getElementById("textoCifradoRSA").textContent =  mensajeCifradoCifrado;
+    document.getElementById("textoCifradoRSA").textContent =  mensajeArrayCharCifrado;
 });
 
 
 // Evento de descifrado al hacer clic en el botón "Descifrar con RSA"
 document.getElementById("descifrarBtnRSA").addEventListener("click", function() {
-    const mensajeCifrado = document.getElementById("textoCifradoRSA").textContent;
+    const mensajeCifrado = arrayCharCifrado
     const d = parseInt(document.getElementById("valorD").textContent)
     const n = parseInt(document.getElementById("valorN").textContent)
 
@@ -147,12 +136,14 @@ document.getElementById("descifrarBtnRSA").addEventListener("click", function() 
     console.log("mensajeCifrado:", mensajeCifrado);
 console.log("d:", d);
 console.log("n:", n);
-    const mensajeCifradoArray = mensajeCifrado.split(',').map(Number);
-    const mensajeDescifradoArray = mensajeCifradoArray.map(charCode => (Math.pow(charCode, d) % n));
-    const mensajeDescifrado = String.fromCharCode(...mensajeDescifradoArray);
-
+    const mensajeCifradoArray = arrayCharCifrado;
     console.log("mensajeCifradoArray:", mensajeCifradoArray);
-console.log("mensajeDescifradoArray:", mensajeDescifradoArray);
+    
+    const mensajeDescifradoArray = mensajeCifradoArray.map(charCode => (Math.pow(charCode, d) % n) +5);
+    console.log("mensajeDescifradoArray:", mensajeDescifradoArray);
+    
+    const mensajeDescifrado = String.fromCharCode(...mensajeDescifradoArray );
+
 console.log("mensajeDescifrado:", mensajeDescifrado);
 
     document.getElementById("textoDescifradoRSA").textContent =  mensajeDescifrado;
