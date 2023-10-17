@@ -9,9 +9,9 @@
 </head>
 <body>
 
-    
-<div class="container mt-5">
-    <h1>Cifrado con AES</h1>
+    <div class="row container ">
+<div class=" col-6 mt-5">
+    <h2>Cifrado con AES</h2>
     <form id="cifradoForm">
       <div class="form-group">
         <label for="claveCifrado">Clave de Cifrado</label>
@@ -29,7 +29,7 @@
       <p id="textoCifrado"></p>
     </div>
   
-    <h1>Descifrado con AES</h1>
+    <h2>Descifrado con AES</h2>
     <form id="descifradoForm">
       <div class="form-group">
         <label for="claveDescifrado">Clave de Descifrado</label>
@@ -44,11 +44,82 @@
       <p id="claveIncorrecta" class="text-danger"></p> <!-- Mensaje de clave incorrecta -->
     </div>
   </div>
+
+
+
+  <div class=" col-6 mt-5">
+  
+
+    <h2>Cifrado con RSA</h2>
+    <form id="cifradoForm">
+
+        <div class="form-group">
+            <label for="mensajeOriginalRSA">Clave a cifrar</label>
+            <input type="text" class="form-control" id="mensajeOriginalRSA" placeholder="Introduce la clave de AES para cifrar con RSA">
+        </div>
+
+        <div class="form-group">
+            <label for="primoP">Numero primo p</label>
+            <input type="number" class="form-control" id="primoP" placeholder="Introduce el primo P">
+        </div>
+
+        <div class="form-group">
+            <label for="primoQ">Numero primo q</label>
+            <input type="number" class="form-control" id="primoQ" placeholder="Introduce el primo Q">
+        </div>
+
+        <button type="button" class="btn btn-primary" id="calcularNyPhi">Calcular</button>
+
+        <div class="form-group">
+            Aqui ira el valor calculado de N (p*q)
+            <p id="valorN" ></p>
+            Aqui ira el valor calculado de Phi (p-1)*(p-2)
+            <p id="valorPhi"></p>
+            
+        </div>
+        <div class="form-group">
+            <label for="chooseInteger">Elige un entero posible</label>
+            <select id="enterosPosibles">
+                <option value=""></option>
+            </select>
+        </div>
+        <button type="button" class="btn btn-primary" id="calcularD">Calcular </button>
+        <div class="form-group">
+            Aqui ira el valor calculado de d d ≡ e−1 (mod phi(n)); here, d is the modular multiplicative inverse of e modulo phi(n)
+            <p id="valorD"></p>
+            
+            
+        </div>
+    </form>
+
+    <div class="mt-3">
+        <h3>Texto Cifrado </h3>
+        <p id="textoCifradoRSA"> </p>
+    </div>
+
+    <h2>Descifrado con RSA</h2>
+    <form id="descifradoFormRSA">
+      
+        <button type="button" class="btn btn-primary" id="descifrarBtnRSA">Descifrar con RSA</button>
+    </form>
+
+    <div class="mt-3">
+        <h3>Texto Descifrado</h3>
+        <p id="textoDescifradoRSA"></p>
+        <p id="claveIncorrecta" class="text-danger"></p>
+    </div>
+</div>
+
+
+</div>
+
+
+
       <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+<script> </script>
 <script src="script.js"></script>
 
 </body>
